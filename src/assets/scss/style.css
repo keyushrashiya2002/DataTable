@@ -46,17 +46,17 @@
   border-right: 1px solid color(srgb 0.9119 0.9219 0.9261);
 }
 
-.jaZsat {
+.rdt_Pagination select {
   background-color: color(srgb 0.9336 0.9536 0.9706) !important;
-  padding: 5px 10px;
+  padding: 5px 20px 5px 10px;
 }
 
-.gMliOo svg {
+.rdt_Pagination select + svg {
   top: 50% !important;
   transform: translateY(-50%);
 }
 @media (min-width: 600px) {
-  .gMliOo {
+  .rdt_Pagination div:has(> select) {
     margin-right: auto;
   }
 }

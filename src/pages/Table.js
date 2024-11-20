@@ -124,11 +124,15 @@ const Table = () => {
         <Card className={"mt-4"}>
           <CardHeader>
             <Row className="justify-content-between align-items-center">
-              <Col lg={3} className="mb-lg-0 mb-3 text-center text-lg-start">
+              <Col
+                lg={2}
+                xl={3}
+                className="mb-lg-0 mb-3 text-center text-lg-start">
                 <h4 className="mb-0">Products</h4>
               </Col>
               <Col
-                lg={8}
+                lg={10}
+                xl={8}
                 className="d-flex align-items-center justify-content-end">
                 <Row className={"align-items-center"}>
                   <Col lg={3} sm={6}>

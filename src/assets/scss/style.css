@@ -38,7 +38,7 @@
 
 .css-t3ipsp-control:hover,
 .css-t3ipsp-control {
-  border-color: var(--vz-input-border) !important;
+  border: none !important;
   box-shadow: none !important;
 }
 .rdt_TableHeadRow .rdt_TableCol:not(:last-child),
@@ -47,10 +47,25 @@
 }
 
 .jaZsat {
-  border: 1px solid rgb(217, 217, 217) !important;
+  background-color: color(srgb 0.9336 0.9536 0.9706) !important;
+  padding: 5px 10px;
+}
+
+.gMliOo svg {
+  top: 50% !important;
+  transform: translateY(-50%);
 }
 @media (min-width: 600px) {
   .gMliOo {
     margin-right: auto;
   }
+}
+
+.css-t3ipsp-control,
+.css-13cymwt-control,
+.form-control {
+  background-color: color(srgb 0.9336 0.9536 0.9706) !important;
+  border: none !important;
+  border-radius: 7px !important;
+  min-height: 38px !important;
 }

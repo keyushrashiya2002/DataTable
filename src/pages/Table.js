@@ -1,10 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 
 // Components
 import DataTable from "react-data-table-component";
 import Flatpickr from "react-flatpickr";
 import moment from "moment";
-import Loading from "../Components/Loading";
+
 import Select from "react-select";
 
 // UI elements
@@ -23,7 +23,8 @@ import {
 import { getProduct } from "../store/product/thunk";
 import { useDispatch, useSelector } from "react-redux";
 import { clearProductFilter, setProductFilter } from "../store/product/slice";
-import NoData from "../Components/Loading";
+import Loading from "../Components/Loading";
+import NoData from "../Components/NoData";
 
 const getMomentDate = (date, format) => {
   return moment(date).format(format ? format : "DD/MM/YYYY");
@@ -31,6 +32,7 @@ const getMomentDate = (date, format) => {
 
 const Table = () => {
   const dispatch = useDispatch();
+  const flatpickrRef = useRef(null);
   const [filterChanged, setFilterChanged] = useState(false);
 
   const data = useSelector((state) => state.Product.data);
@@ -72,6 +74,7 @@ const Table = () => {
   };
   const clearFilter = () => {
     dispatch(clearProductFilter());
+    flatpickrRef.current.flatpickr.clear();
   };
 
   const columns = [
@@ -168,15 +171,13 @@ const Table = () => {
                     sm={12}
                     className={"d-flex align-items-center mt-lg-0 mt-2"}>
                     <Flatpickr
+                      ref={flatpickrRef}
                       className="form-control w-100  dash-filter-picker "
                       options={{
                         mode: "range",
                         dateFormat: "d M, Y",
-                        defaultDate: [
-                          getMomentDate(filter.from, "DD MMM YYYY"),
-                          getMomentDate(filter.to, "DD MMM YYYY"),
-                        ],
                       }}
+                      placeholder="Select Date"
                       onChange={handleDateFilter}
                     />
                     {Object.values(filter).filter((item) => item !== "")

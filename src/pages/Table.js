@@ -105,6 +105,8 @@ const Table = () => {
     },
   ];
 
+  console.log("filter", filter);
+
   return (
     <>
       <Container>
@@ -147,23 +149,23 @@ const Table = () => {
                   <i className="ri-search-line search-icon"></i>
                 </div>
 
-                <div className="input-group d-flex me-1">
-                  <Flatpickr
-                    className="form-control  dash-filter-picker "
-                    options={{
-                      mode: "range",
-                      dateFormat: "d M, Y",
-                      defaultDate: [
-                        getMomentDate(filter.from, "DD MMM YYYY"),
-                        getMomentDate(filter.to, "DD MMM YYYY"),
-                      ],
-                    }}
-                    onChange={handleDateFilter}
-                  />
-                </div>
+                <Flatpickr
+                  className="form-control w-50  dash-filter-picker "
+                  options={{
+                    mode: "range",
+                    dateFormat: "d M, Y",
+                    defaultDate: [
+                      getMomentDate(filter.from, "DD MMM YYYY"),
+                      getMomentDate(filter.to, "DD MMM YYYY"),
+                    ],
+                  }}
+                  onChange={handleDateFilter}
+                />
+
                 {Object.keys(filter).length !== 0 && (
                   <Button
                     color="danger"
+                    className={"ms-1"}
                     disabled={loading}
                     onClick={clearFilter}>
                     Clear

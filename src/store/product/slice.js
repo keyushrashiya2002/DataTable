@@ -1,6 +1,7 @@
 // Import statements for fetchProduct function and createAsyncThunk
 import { createSlice } from "@reduxjs/toolkit";
 import { getProduct } from "./thunk";
+import moment from "moment";
 
 // Initial state definition
 let initialState = {
@@ -22,8 +23,13 @@ const slice = createSlice({
     setProductFilter: (state, action) => {
       state.filter = { ...state.filter, ...action.payload };
     },
-    clearProductFilter: (state, action) => {
-      state.filter = {};
+    clearProductFilter: (state) => {
+      state.filter = {
+        text: "",
+        category: "",
+        to: moment().format("DD MMM YYYY"),
+        from: moment().format("DD MMM YYYY"),
+      };
     },
   },
   // Extra reducers to handle async actions

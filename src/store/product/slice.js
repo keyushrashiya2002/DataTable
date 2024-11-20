@@ -27,8 +27,8 @@ const slice = createSlice({
       state.filter = {
         text: "",
         category: "",
-        to: moment().format("DD MMM YYYY"),
-        from: moment().format("DD MMM YYYY"),
+        to: "",
+        from: "",
       };
     },
   },

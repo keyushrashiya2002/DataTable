@@ -122,14 +122,11 @@ const Table = () => {
                 <div className="search-box me-1">
                   <Input
                     type="select"
-                    className="search"
+                    className="search w-auto"
                     name="category"
                     value={filter.category}
                     placeholder="Search here.."
                     onChange={handleFilter}>
-                    <option disabled value="">
-                      category
-                    </option>
                     <option value={""}>All Category</option>
                     <option value={"Diamond"}>Diamond</option>
                     <option value={"Silver"}>Silver</option>

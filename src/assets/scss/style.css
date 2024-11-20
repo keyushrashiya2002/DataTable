@@ -9,3 +9,48 @@
     transform: rotate(360deg);
   }
 }
+.desc.__rdt_custom_sort_icon__ i,
+.asc.__rdt_custom_sort_icon__ i {
+  transform: none !important;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 1 !important;
+  height: 5px !important;
+  font-size: 11px !important;
+  color: rgba(0, 0, 0, 0.5) !important;
+}
+.asc.__rdt_custom_sort_icon__ i:first-child,
+.desc.__rdt_custom_sort_icon__ i:last-child {
+  color: black !important;
+}
+
+.desc.__rdt_custom_sort_icon__,
+.asc.__rdt_custom_sort_icon__ {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  line-height: normal;
+}
+.rdt_TableHeadRow {
+  background-color: #eff1f487 !important;
+}
+
+.css-t3ipsp-control:hover,
+.css-t3ipsp-control {
+  border-color: var(--vz-input-border) !important;
+  box-shadow: none !important;
+}
+.rdt_TableHeadRow .rdt_TableCol:not(:last-child),
+.rdt_TableRow .rdt_TableCell:not(:last-child) {
+  border-right: 1px solid color(srgb 0.9119 0.9219 0.9261);
+}
+
+.jaZsat {
+  border: 1px solid rgb(217, 217, 217) !important;
+}
+@media (min-width: 600px) {
+  .gMliOo {
+    margin-right: auto;
+  }
+}

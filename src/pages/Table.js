@@ -5,6 +5,7 @@ import DataTable from "react-data-table-component";
 import Flatpickr from "react-flatpickr";
 import moment from "moment";
 import Loading from "../Components/Loading";
+import Select from "react-select";
 
 // UI elements
 import {
@@ -22,6 +23,7 @@ import {
 import { getProduct } from "../store/product/thunk";
 import { useDispatch, useSelector } from "react-redux";
 import { clearProductFilter, setProductFilter } from "../store/product/slice";
+import NoData from "../Components/Loading";
 
 const getMomentDate = (date, format) => {
   return moment(date).format(format ? format : "DD/MM/YYYY");
@@ -74,100 +76,116 @@ const Table = () => {
 
   const columns = [
     {
-      name: <span className="font-weight-bold fs-13">ID</span>,
+      name: <span className="font-weight-bold text-muted fs-13">ID</span>,
       selector: (row) => row.id,
       sortable: true,
     },
     {
-      name: <span className="font-weight-bold fs-13">SKU</span>,
+      name: <span className="font-weight-bold text-muted fs-13">SKU</span>,
       selector: (row) => row.sku,
       sortable: true,
     },
     {
-      name: <span className="font-weight-bold fs-13">Name</span>,
+      name: <span className="font-weight-bold text-muted fs-13">Name</span>,
       selector: (row) => row.name,
       sortable: true,
     },
     {
-      name: <span className="font-weight-bold fs-13">Category</span>,
+      name: <span className="font-weight-bold text-muted fs-13">Category</span>,
       selector: (row) => row.category,
       sortable: true,
     },
     {
-      name: <span className="font-weight-bold fs-13">Description</span>,
+      name: (
+        <span className="font-weight-bold text-muted fs-13">Description</span>
+      ),
       selector: (row) => row.description,
       sortable: true,
     },
     {
-      name: <span className="font-weight-bold fs-13">Launch Date</span>,
+      name: (
+        <span className="font-weight-bold text-muted fs-13">Launch Date</span>
+      ),
       selector: (row) => row.launchDate,
       sortable: true,
     },
   ];
 
-  console.log("filter", filter);
+  const options = [
+    { value: "", label: "All Category" },
+    { value: "Diamond", label: "Diamond" },
+    { value: "Silver", label: "Silver" },
+    { value: "Gold", label: "Gold" },
+  ];
 
   return (
     <>
       <Container>
-        <Card className={"mt-5"}>
+        <Card className={"mt-4"}>
           <CardHeader>
             <Row className="justify-content-between align-items-center">
-              <Col lg={3} className="mb-lg-0 mb-2 text-center text-lg-start">
-                <h3 className="mb-0">Products</h3>
+              <Col lg={3} className="mb-lg-0 mb-3 text-center text-lg-start">
+                <h4 className="mb-0">Products</h4>
               </Col>
               <Col
-                lg={7}
+                lg={8}
                 className="d-flex align-items-center justify-content-end">
-                <div className="search-box me-1">
-                  <Input
-                    type="select"
-                    className="search w-auto"
-                    name="category"
-                    value={filter.category}
-                    placeholder="Search here.."
-                    onChange={handleFilter}>
-                    <option value={""}>All Category</option>
-                    <option value={"Diamond"}>Diamond</option>
-                    <option value={"Silver"}>Silver</option>
-                    <option value={"Gold"}>Gold</option>
-                    <option value={"Silver"}>Silver</option>
-                  </Input>
-                </div>
-                <div className="search-box me-1">
-                  <Input
-                    type="text"
-                    className="search"
-                    name="text"
-                    value={filter.text}
-                    placeholder="Search here.."
-                    onChange={handleFilter}
-                  />
-                  <i className="ri-search-line search-icon"></i>
-                </div>
-
-                <Flatpickr
-                  className="form-control w-50  dash-filter-picker "
-                  options={{
-                    mode: "range",
-                    dateFormat: "d M, Y",
-                    defaultDate: [
-                      getMomentDate(filter.from, "DD MMM YYYY"),
-                      getMomentDate(filter.to, "DD MMM YYYY"),
-                    ],
-                  }}
-                  onChange={handleDateFilter}
-                />
-
-                {Object.keys(filter).length !== 0 && (
-                  <Button
-                    color="danger"
-                    className={"ms-1"}
-                    disabled={loading}
-                    onClick={clearFilter}>
-                    Clear
-                  </Button>
-                )}
+                <Row className={"align-items-center"}>
+                  <Col lg={3} sm={6}>
+                    <div className="search-box">
+                      <Input
+                        type="text"
+                        className="search"
+                        name="text"
+                        value={filter.text}
+                        placeholder="Search here.."
+                        onChange={handleFilter}
+                      />
+                      <i className="ri-search-line search-icon"></i>
+                    </div>
+                  </Col>
+                  <Col lg={3} sm={6} className={"mt-sm-0 mt-2"}>
+                    <div className="search-box">
+                      <Select
+                        className=""
+                        value={options.find(
+                          (item) => item.value === filter.category
+                        )}
+                        onChange={(data) => {
+                          dispatch(setProductFilter({ category: data.value }));
+                          setFilterChanged(true);
+                        }}
+                        options={options}
+                      />
+                    </div>
+                  </Col>
+                  <Col
+                    lg={6}
+                    className={"d-flex align-items-center mt-lg-0 mt-2"}>
+                    <Flatpickr
+                      className="form-control w-100  dash-filter-picker "
+                      options={{
+                        mode: "range",
+                        dateFormat: "d M, Y",
+                        defaultDate: [
+                          getMomentDate(filter.from, "DD MMM YYYY"),
+                          getMomentDate(filter.to, "DD MMM YYYY"),
+                        ],
+                      }}
+                      onChange={handleDateFilter}
+                    />
+                    {Object.values(filter).filter((item) => item !== "")
+                      .length !== 0 && (
+                      <Button
+                        color="danger"
+                        className={"ms-2"}
+                        disabled={loading}
+                        onClick={clearFilter}>
+                        Clear
+                      </Button>
+                    )}
+                  </Col>
+                </Row>
               </Col>
             </Row>
           </CardHeader>
@@ -178,6 +196,14 @@ const Table = () => {
               pagination
               progressPending={loading}
               progressComponent={<Loading />}
+              noDataComponent={<NoData />}
+              sortIcon={
+                <div>
+                  {/* <i className="ri-sort-asc "></i> */}
+                  <i className="ri-arrow-up-s-line "></i>
+                  <i className="ri-arrow-down-s-line "></i>
+                </div>
+              }
             />
           </CardBody>
         </Card>

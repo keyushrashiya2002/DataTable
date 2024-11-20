@@ -36,6 +36,7 @@ const fakeBackend = () => {
 
           data = data.filter((item) => {
             const itemDate = moment(item.launchDate, "DD MMM, YYYY"); // Parse 'launchDate' string into a moment object
+
             return (
               (!fromDate || itemDate.isSameOrAfter(fromDate)) && // Include from date
               (!toDate || itemDate.isSameOrBefore(toDate)) // Include to date

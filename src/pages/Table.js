@@ -135,7 +135,7 @@ const Table = () => {
                 xl={8}
                 className="d-flex align-items-center justify-content-xl-end justify-content-center">
                 <Row className={"align-items-center w-100"}>
-                  <Col lg={3} sm={6}>
+                  <Col lg={4} sm={6}>
                     <div className="search-box">
                       <Input
                         type="text"
@@ -164,7 +164,7 @@ const Table = () => {
                     </div>
                   </Col>
                   <Col
-                    lg={6}
+                    lg={5}
                     sm={12}
                     className={"d-flex align-items-center mt-lg-0 mt-2"}>
                     <Flatpickr
